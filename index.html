@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================================ -->
+  <!-- HEAD SECTION: Meta tags, Tailwind CSS, custom styles, and configuration     -->
+  <!-- Purpose: Document setup, SEO meta tags, responsive viewport, styling        -->
+  <!-- ============================================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boomer Bot — Your AI-Powered Sooner Sports Companion</title>
+  <meta name="description" content="Boomer Bot connects OU fans to every Sooner sport — football, softball, basketball, gymnastics, and more. Get live scores, trivia, and updates all in one place." />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ===== CUSTOM CSS ANIMATIONS ===== -->
+  <!-- Includes: button pulse effect, fade-in animations, gradient text styling -->
+  <style>
+    /* ===== BUTTON PULSE ANIMATION ===== */
+    /* Creates a subtle scaling effect on hover for CTA buttons */
+    @keyframes pulse { 
+      0%, 100% { transform: scale(1); } 
+      50% { transform: scale(1.05); } 
+    }
+    .btn-pulse:hover { 
+      animation: pulse 0.5s infinite; 
+    }
+
+    /* ===== FADE IN UP ANIMATION ===== */
+    /* Sections animate in from below with opacity transition */
+    @keyframes fadeInUp { 
+      from { opacity: 0; transform: translateY(30px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    .fade-in-section { 
+      opacity: 0; 
+      animation: fadeInUp 0.8s ease-out forwards; 
+    }
+
+    /* ===== GRADIENT TEXT EFFECT ===== */
+    /* OU crimson to cream gradient for accent text */
+    .gradient-text { 
+      background: linear-gradient(135deg, #841617, #FDF9E1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+    }
+
+    /* ===== SMOOTH SCROLL BEHAVIOR ===== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== NAVIGATION OFFSET FOR FIXED HEADER ===== */
+    /* Ensures anchor links don't hide content under fixed nav */
+    [id] {
+      scroll-margin-top: 100px;
+    }
+  </style>
+</head>
+
+<body class="bg-[#FDF9E1] text-gray-900 font-sans">
+
+  <!-- ============================================================================ -->
+  <!-- TOP ALERT BANNER: Beta announcement for multi-sport features                -->
+  <!-- Purpose: Inform users about current availability and upcoming features      -->
+  <!-- ============================================================================ -->
+  <div class="bg-yellow-300 text-[#841617] text-center py-2 px-4 font-bold text-sm md:text-base">
+    ⚙️ Multi-Sport Mode in Beta — Football Live Now • Softball & Basketball Coming Soon!
+  </div>
+
+  <!-- ============================================================================ -->
+  <!-- NAVIGATION: Fixed header with logo, brand name, and navigation links        -->
+  <!-- Features: Sticky positioning, mobile-responsive, CTA button                 -->
+  <!-- Mobile: Hamburger menu for smaller screens                                  -->
+  <!-- ============================================================================ -->
+  <nav class="fixed top-8 md:top-10 w-full bg-[#841617] text-[#FDF9E1] z-50 shadow-lg" data-section="navigation">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+      <!-- Logo and Brand Name -->
+      <div class="flex items-center space-x-2 md:space-x-3">
+        <img src="https://raw.githubusercontent.com/myvfc/botosphere-images/main/BB%20all%20sports.png"
+             alt="Boomer Bot Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full">
+        <div>
+          <span class="text-lg md:text-2xl font-bold">Boomer Bot</span><br>
+          <span class="text-xs md:text-sm italic hidden sm:inline">Powered by The Botosphere, Our AI Hosting Companion</span>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg hover:bg-red-700 transition" aria-label="Toggle mobile menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- Desktop Navigation Links -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="#features" class="hover:underline transition">Features</a>
+        <a href="#how-it-works" class="hover:underline transition">How It Works</a>
+        <a href="#pricing" class="hover:underline transition">Pricing</a>
+        <a href="#pricing" class="bg-[#FDF9E1] text-[#841617] px-4 py-2 rounded-lg font-bold hover:bg-white transition">Get Started</a>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu (Hidden by default) -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#841617] border-t border-red-700 px-4 py-4">
+      <div class="flex flex-col space-y-3">
+        <a href="#features" class="hover:bg-red-700 px-3 py-2 rounded-lg transition">Features</a>
+        <a href="#how-it-works" class="hover:bg-red-700 px-3 py-2 rounded-lg transition">How It Works</a>
+        <a href="#pricing" class="hover:bg-red-700 px-3 py-2 rounded-lg transition">Pricing</a>
+        <a href="#pricing" class="bg-[#FDF9E1] text-[#841617] px-4 py-2 rounded-lg font-bold text-center hover:bg-white transition">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================================ -->
+  <!-- HERO SECTION: Main landing area with headline, video, and subscription CTAs -->
+  <!-- Features: Gradient background, embedded video, dual CTA buttons             -->
+  <!-- Mobile Padding: px-4 py-6 ensures content never touches viewport edges      -->
+  <!-- ============================================================================ -->
+  <section class="bg-gradient-to-r from-[#841617] to-red-800 text-[#FDF9E1] pt-36 md:pt-40 pb-16 md:pb-20 px-4 md:px-6 text-center fade-in-section" data-section="hero">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Main Headline -->
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 md:mb-6 leading-tight px-2">
+        All OU Sports. One Bot.
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-base sm:text-lg md:text-xl italic mb-6 max-w-3xl mx-auto px-2">
+        Boomer Bot is your AI-powered sports companion — connecting Sooner fans to football, softball,
+        basketball, gymnastics, and more with scores, trivia, and highlights 24/7.
+      </p>
+
+      <!-- Featured Video Embed -->
+      <div class="max-w-xl md:max-w-2xl mx-auto mb-6 px-2">
+        <div class="relative w-full" style="padding-bottom: 56.25%;">
+          <iframe 
+            allow="fullscreen" 
+            allowfullscreen 
+            src="https://streamable.com/e/jv1qe2?"
+            class="absolute inset-0 w-full h-full rounded-xl shadow-lg"
+            style="border: none;">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Supporting Quote -->
+      <p class="italic text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto px-2">
+        "From the gridiron to the gym, Boomer Bot celebrates all Sooner athletics — football, softball,
+        basketball, gymnastics, and beyond."
+      </p>
+
+      <!-- Subscription CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-6 md:mt-8 px-2">
+        <!-- Basic Plan Button -->
+        <a href="https://app.thebotosphere.com/agents/37094353/boomerbotbasic"
+           class="inline-block bg-[#841617] text-[#FDF9E1] border-2 border-[#FDF9E1] font-bold px-6 md:px-10 py-3 md:py-4 rounded-xl shadow-md hover:bg-red-900 transition text-base md:text-xl text-center w-full sm:w-72">
+           🔥 Join Basic — $9.99/Month
+        </a>
+
+        <!-- Premium Plan Button -->
+        <a href="https://app.thebotosphere.com/agents/57704198/boomerbotpremium"
+           class="inline-block bg-[#FDF9E1] text-[#841617] border-2 border-[#FDF9E1] font-bold px-6 md:px-10 py-3 md:py-4 rounded-xl shadow-md hover:bg-white transition text-base md:text-xl text-center w-full sm:w-72">
+           🚀 Premium — $14.99/Month
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- BOT EMBED SECTION: Interactive chatbot iframe with auto-resize              -->
+  <!-- Purpose: Allow users to test the bot directly on the landing page           -->
+  <!-- Features: Responsive container, auto-resize script integration              -->
+  <!-- ============================================================================ -->
+  <section class="py-8 md:py-12 px-4 md:px-6 bg-[#FDF9E1]" data-section="bot-embed">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-[#841617]">Try Boomer Bot Now</h2>
+      <div class="w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-lg border-4 border-[#841617]">
+        <iframe 
+          src="https://app.thebotosphere.com/agents/8499193/embed"
+          data-auto-resize="true"
+          frameborder="0"
+          style="width: 100%; height: 1px; border: none; display: block;">
+        </iframe>
+      </div>
+      <p class="text-center text-sm text-gray-600 mt-4">
+        Chat with Boomer Bot above to see what it can do!
+      </p>
+    </div>
+    <!-- Auto-resize script for embedded iframe -->
+    <script src="https://app.thebotosphere.com/iframe-auto-resize.js"></script>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- FEATURES SECTION: Grid showcasing key benefits and capabilities             -->
+  <!-- Features: 2-column grid on desktop, stacked on mobile, icon-enhanced cards  -->
+  <!-- Mobile Padding: px-4 ensures safe spacing on all devices                    -->
+  <!-- ============================================================================ -->
+  <section id="features" class="bg-[#841617] text-[#FDF9E1] py-12 md:py-16 px-4 md:px-6 text-center fade-in-section" data-section="features">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Why Fans Love Boomer Bot</h2>
+
+      <div class="grid sm:grid-cols-2 gap-4 md:gap-8 text-left">
+        <!-- Feature Card 1: Football Focus -->
+        <div class="bg-red-900 bg-opacity-50 p-4 md:p-6 rounded-lg">
+          <h3 class="font-bold text-lg md:text-xl mb-2">🏈 Football Focused, Multi-Sport Ready</h3>
+          <p class="text-sm md:text-base">Real-time football insights today — expanding to all OU sports this season.</p>
+        </div>
+
+        <!-- Feature Card 2: Softball & Basketball -->
+        <div class="bg-red-900 bg-opacity-50 p-4 md:p-6 rounded-lg">
+          <h3 class="font-bold text-lg md:text-xl mb-2">🥎 Softball & Hoops Coverage</h3>
+          <p class="text-sm md:text-base">Follow OU's powerhouse softball and basketball programs as they dominate.</p>
+        </div>
+
+        <!-- Feature Card 3: Gymnastics -->
+        <div class="bg-red-900 bg-opacity-50 p-4 md:p-6 rounded-lg">
+          <h3 class="font-bold text-lg md:text-xl mb-2">🤸‍♂️ National Championship Gymnastics</h3>
+          <p class="text-sm md:text-base">Celebrate OU's legendary men's and women's gymnastics teams and champions.</p>
+        </div>
+
+        <!-- Feature Card 4: Voice/Text Chat -->
+        <div class="bg-red-900 bg-opacity-50 p-4 md:p-6 rounded-lg">
+          <h3 class="font-bold text-lg md:text-xl mb-2">🎧 Voice or Text Chat</h3>
+          <p class="text-sm md:text-base">Talk or type — Boomer Bot answers instantly with personality and spirit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- HOW IT WORKS SECTION: Three-step process explanation                        -->
+  <!-- Features: Numbered steps, clear icons, responsive 3-column grid             -->
+  <!-- Purpose: Guide users through the signup and usage process                   -->
+  <!-- ============================================================================ -->
+  <section id="how-it-works" class="py-12 md:py-16 px-4 md:px-6 bg-gray-50 fade-in-section" data-section="how-it-works">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-[#841617]">How It Works</h2>
+
+      <div class="grid sm:grid-cols-3 gap-6 md:gap-8 text-center">
+        <!-- Step 1: Sign Up -->
+        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-[#841617] text-[#FDF9E1] rounded-full flex items-center justify-center mx-auto mb-4 text-xl md:text-2xl font-bold">1</div>
+          <h3 class="font-bold text-lg md:text-xl mb-2">Sign Up</h3>
+          <p class="text-sm md:text-base text-gray-600">Subscribe in seconds and start chatting instantly.</p>
+        </div>
+
+        <!-- Step 2: Choose Sport -->
+        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-[#841617] text-[#FDF9E1] rounded-full flex items-center justify-center mx-auto mb-4 text-xl md:text-2xl font-bold">2</div>
+          <h3 class="font-bold text-lg md:text-xl mb-2">Choose Your Sport</h3>
+          <p class="text-sm md:text-base text-gray-600">Ask about football now — basketball, softball, and more are next!</p>
+        </div>
+
+        <!-- Step 3: Chat -->
+        <div class="bg-white p-4 md:p-6 rounded-xl shadow-md">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-[#841617] text-[#FDF9E1] rounded-full flex items-center justify-center mx-auto mb-4 text-xl md:text-2xl font-bold">3</div>
+          <h3 class="font-bold text-lg md:text-xl mb-2">Chat Anytime</h3>
+          <p class="text-sm md:text-base text-gray-600">Get scores, schedules, trivia, and Sooner stories on demand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- TESTIMONIALS SECTION: Social proof from users                               -->
+  <!-- Features: Quote styling, user attribution, credibility building             -->
+  <!-- ============================================================================ -->
+  <section class="py-12 md:py-16 px-4 md:px-6 bg-[#FDF9E1]" data-section="testimonials">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#841617]">What Fans Are Saying</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#841617]">
+          <p class="text-gray-700 italic mb-4">"Boomer Bot keeps me updated on every Sooner game. It's like having a sports buddy who never sleeps!"</p>
+          <p class="font-bold text-[#841617]">— Jake M., Norman, OK</p>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#841617]">
+          <p class="text-gray-700 italic mb-4">"The trivia feature is addictive. I've learned so much about OU history I never knew!"</p>
+          <p class="font-bold text-[#841617]">— Sarah T., Tulsa, OK</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- PRICING SECTION: Three-tier pricing cards with feature comparisons          -->
+  <!-- Features: Highlighted premium tier, clear pricing, feature lists            -->
+  <!-- Mobile Padding: Ensures cards display properly on all screen sizes          -->
+  <!-- ============================================================================ -->
+  <section id="pricing" class="py-16 md:py-20 px-4 md:px-6 bg-gray-50" data-section="pricing">
+    <div class="max-w-6xl mx-auto text-center">
+
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-[#841617]">Choose Your Boomer Bot Plan</h2>
+      <p class="text-base md:text-lg mb-8 md:mb-12 text-gray-700 max-w-2xl mx-auto">
+        All plans include 24/7 access, trivia, scores, and Sooner spirit year-round.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+
+        <!-- BASIC PLAN -->
+        <div class="bg-white border-4 border-[#841617] rounded-2xl shadow-lg p-6 md:p-8 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl md:text-2xl font-bold text-[#841617] mb-2">🔥 Basic</h3>
+            <p class="text-gray-600 mb-4 text-sm md:text-base">Perfect for everyday Sooner fans.</p>
+
+            <div class="text-4xl md:text-5xl font-extrabold text-[#841617] mb-2">$9</div>
+            <div class="text-gray-500 mb-6">per month</div>
+
+            <ul class="text-left space-y-2 mb-6 text-gray-700 text-sm md:text-base">
+              <li>✔️ Text & voice chat access</li>
+              <li>✔️ Real-time football updates</li>
+              <li>✔️ Daily OU trivia</li>
+              <li>✔️ Cancel anytime</li>
+            </ul>
+          </div>
+
+          <a href="https://app.thebotosphere.com/agents/37094353/boomerbotbasic"
+             class="inline-block bg-white text-[#841617] border-2 border-[#841617] font-bold px-6 md:px-10 py-3 md:py-4 rounded-xl shadow-md hover:bg-[#FDF9E1] transition text-lg md:text-xl w-full">
+            Join Basic
+          </a>
+        </div>
+
+        <!-- PREMIUM PLAN (Highlighted) -->
+        <div class="bg-[#841617] text-[#FDF9E1] border-4 border-[#841617] rounded-2xl shadow-xl p-6 md:p-8 flex flex-col justify-between md:scale-105 relative">
+          <!-- Popular Badge -->
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-[#841617] px-4 py-1 rounded-full text-sm font-bold">
+            Most Popular
+          </div>
+          <div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2 mt-2">🚀 Premium</h3>
+            <p class="opacity-90 mb-4 text-sm md:text-base">For superfans who want the full Sooner experience.</p>
+
+            <div class="text-4xl md:text-5xl font-extrabold mb-2">$14</div>
+            <div class="opacity-90 mb-6">per month</div>
+
+            <ul class="text-left space-y-2 mb-6 opacity-90 text-sm md:text-base">
+              <li>✔️ Everything in Basic</li>
+              <li>✔️ Multi-sport coverage (softball, basketball +)</li>
+              <li>✔️ Exclusive OU history & stats</li>
+              <li>✔️ Premium fan trivia drops</li>
+            </ul>
+          </div>
+
+          <a href="https://app.thebotosphere.com/agents/57704198/boomerbotpremium"
+             class="inline-block bg-white text-[#841617] font-bold px-6 md:px-10 py-3 md:py-4 rounded-xl shadow-md hover:opacity-90 transition text-lg md:text-xl w-full">
+            Join Premium
+          </a>
+        </div>
+
+        <!-- DELUXE PLAN (Coming Soon) -->
+        <div class="bg-white border-4 border-gray-300 rounded-2xl shadow-md p-6 md:p-8 flex flex-col justify-between opacity-90">
+          <div>
+            <h3 class="text-xl md:text-2xl font-bold text-[#841617] mb-2">⭐ Deluxe</h3>
+            <p class="text-gray-700 mb-4 text-sm md:text-base">
+              Coming Soon — featuring Sooner celebrity voices & special fan interactions!
+            </p>
+
+            <div class="text-3xl md:text-4xl font-extrabold text-gray-400 mb-2">Coming Soon</div>
+            <div class="text-gray-500 mb-6">Available soon — stay tuned!</div>
+
+            <ul class="text-left space-y-2 mb-6 text-gray-600 text-sm md:text-base">
+              <li>🎤 OU Legends & Celebrity Voices</li>
+              <li>💬 Personalized Fan Experiences</li>
+              <li>🏆 Behind-the-Scenes Extras</li>
+              <li>🚧 Early Access Waitlist Coming</li>
+            </ul>
+          </div>
+
+          <button class="inline-block bg-gray-300 text-gray-600 font-bold px-6 md:px-10 py-3 md:py-4 rounded-xl cursor-not-allowed text-lg md:text-xl w-full" disabled>
+            Coming Soon
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- FAQ SECTION: Common questions and answers                                   -->
+  <!-- Features: Accordion-style expandable answers, helpful information           -->
+  <!-- ============================================================================ -->
+  <section class="py-12 md:py-16 px-4 md:px-6 bg-[#FDF9E1]" data-section="faq">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-[#841617]">Frequently Asked Questions</h2>
+      
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <button class="faq-toggle w-full text-left p-4 md:p-6 font-bold text-[#841617] flex justify-between items-center hover:bg-gray-50 transition">
+            <span>What sports does Boomer Bot cover?</span>
+            <svg class="w-5 h-5 transform transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-6 text-gray-700">
+            <p>Currently, Boomer Bot focuses on OU Football with real-time updates, scores, and trivia. We're actively expanding to include softball, basketball, gymnastics, and all other Sooner sports throughout 2025!</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <button class="faq-toggle w-full text-left p-4 md:p-6 font-bold text-[#841617] flex justify-between items-center hover:bg-gray-50 transition">
+            <span>Can I cancel my subscription anytime?</span>
+            <svg class="w-5 h-5 transform transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-6 text-gray-700">
+            <p>Absolutely! All Boomer Bot plans come with no long-term commitment. You can cancel anytime, and we offer a 30-day money-back guarantee if you're not completely satisfied.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <button class="faq-toggle w-full text-left p-4 md:p-6 font-bold text-[#841617] flex justify-between items-center hover:bg-gray-50 transition">
+            <span>Does Boomer Bot work on mobile devices?</span>
+            <svg class="w-5 h-5 transform transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-4 md:px-6 pb-4 md:pb-6 text-gray-700">
+            <p>Yes! Boomer Bot works seamlessly on all devices — desktop, tablet, and mobile. Chat via text or use voice commands on any modern browser.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- FINAL CTA SECTION: Last call-to-action before footer                        -->
+  <!-- Features: Compelling headline, supporting text, prominent CTA button        -->
+  <!-- Purpose: Convert visitors who've scrolled through the entire page           -->
+  <!-- ============================================================================ -->
+  <section class="py-16 md:py-20 px-4 md:px-6 text-center bg-gradient-to-r from-[#841617] to-red-800 text-[#FDF9E1]" data-section="final-cta">
+    <div class="max-w-4xl mx-auto">
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 leading-tight">
+        Be More Than a Fan.<br class="hidden sm:block"> Be a Sooner for All Seasons.
+      </h2>
+
+      <p class="text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">
+        Football in the fall, softball in the spring, and basketball in between —
+        Boomer Bot keeps you connected year-round.
+      </p>
+
+      <a href="#pricing"
+         class="inline-block bg-[#FDF9E1] text-[#841617] font-bold px-8 md:px-10 py-3 md:py-4 rounded-xl shadow-lg hover:bg-white transition btn-pulse text-lg md:text-xl">
+         🔥 Join Boomer Bot Today
+      </a>
+
+      <p class="mt-6 text-sm opacity-90">
+        30-day money-back guarantee • Cancel anytime • No hidden fees
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- FOOTER: Site information, navigation links, social media, legal links       -->
+  <!-- Features: 4-column grid on desktop, stacked on mobile, copyright notice     -->
+  <!-- Includes: Company info, quick links, social connections, legal documents    -->
+  <!-- ============================================================================ -->
+  <footer class="bg-[#841617] text-[#FDF9E1] py-10" data-section="footer">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+      
+      <!-- COMPANY INFO -->
+      <div>
+        <img src="https://raw.githubusercontent.com/myvfc/botosphere-images/main/BB%20all%20sports.png" 
+             alt="Boomer Bot Logo" class="w-12 h-12 mb-4 rounded-full">
+
+        <p class="text-sm mb-3">
+          Boomer Bot — Your Sooner Sports Companion for all seasons.
+        </p>
+
+        <p class="text-sm"><strong>Email:</strong> 
+          <a href="mailto:info@boomerbot.fun" class="underline hover:text-white transition">info@boomerbot.fun</a>
+        </p>
+
+        <p class="text-sm"><strong>Phone:</strong> 
+          <a href="tel:+14051234567" class="underline hover:text-white transition">(405) 123-4567</a>
+        </p>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div>
+        <h3 class="font-bold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#features" class="hover:underline transition">Features</a></li>
+          <li><a href="#how-it-works" class="hover:underline transition">How It Works</a></li>
+          <li><a href="#pricing" class="hover:underline transition">Pricing</a></li>
+          <li><a href="#pricing" class="hover:underline transition">Sign Up</a></li>
+        </ul>
+      </div>
+
+      <!-- SOCIAL CONNECTIONS -->
+      <div>
+        <h3 class="font-bold mb-3">Connect</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:underline transition">Facebook</a></li>
+          <li><a href="#" class="hover:underline transition">Twitter / X</a></li>
+          <li><a href="#" class="hover:underline transition">Instagram</a></li>
+          <li><a href="#" class="hover:underline transition">YouTube</a></li>
+        </ul>
+      </div>
+
+      <!-- LEGAL LINKS -->
+      <div>
+        <h3 class="font-bold mb-3">Legal</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:underline transition">Privacy Policy</a></li>
+          <li><a href="#" class="hover:underline transition">Terms of Service</a></li>
+          <li><a href="#" class="hover:underline transition">Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- COPYRIGHT AND ATTRIBUTION -->
+    <div class="border-t border-[#FDF9E1]/40 mt-8 pt-6 text-center text-sm px-4">
+      <div class="flex flex-col items-center justify-center gap-2">
+
+        <p>© 2025 Boomer Bot. All rights reserved. Built by fans, for fans.</p>
+
+        <p class="text-xs opacity-90 max-w-2xl mx-auto">
+          Boomer Bot is not affiliated with or endorsed by the University of Oklahoma
+          or its athletic department. All trademarks belong to their respective owners.
+        </p>
+
+        <!-- The Botosphere Attribution -->
+        <div class="flex items-center justify-center gap-2 mt-3">
+          <a href="https://thebotosphere.com" target="_blank" rel="noopener noreferrer"
+             class="flex items-center gap-2 hover:opacity-90 transition">
+            <img src="https://raw.githubusercontent.com/myvfc/botosphere-images/main/boto%20logo.png" 
+                 alt="The Botosphere Logo" class="h-6">
+            <span class="text-sm font-semibold">Powered by <span class="underline">The Botosphere</span></span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================================ -->
+  <!-- JAVASCRIPT: Mobile menu toggle, FAQ accordion, scroll animations            -->
+  <!-- Functions: toggleMobileMenu(), FAQ accordion handlers, intersection observer -->
+  <!-- ============================================================================ -->
+  <script>
+    // ===== MOBILE MENU TOGGLE =====
+    // Function: Toggle mobile navigation menu visibility
+    // Triggers: Click on hamburger menu button
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // ===== FAQ ACCORDION =====
+    // Function: Toggle FAQ answer visibility
+    // Triggers: Click on FAQ question
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+
+    faqToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon');
+
+        // Toggle content visibility
+        content.classList.toggle('hidden');
+
+        // Rotate icon
+        if (content.classList.contains('hidden')) {
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+
+    // ===== SCROLL ANIMATION OBSERVER =====
+    // Function: Trigger fade-in animations when sections enter viewport
+    // Uses: Intersection Observer API for performance
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in sections
+    const fadeInSections = document.querySelectorAll('.fade-in-section');
+    fadeInSections.forEach(function(section) {
+      section.style.animationPlayState = 'paused';
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>
